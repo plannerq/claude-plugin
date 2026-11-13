@@ -15,7 +15,15 @@ PlannerQ is where your team plans its software work. This plugin connects Claude
 
 ## Install for a project (recommended)
 
-One person adds this to the repository's **`.claude/settings.json`** and commits it. If the file already exists, merge these keys into it; don't overwrite it.
+One person runs this once in the repository's root folder:
+
+```sh
+claude plugin marketplace add plannerq/claude-plugin --scope project && claude plugin install plannerq@plannerq --scope project
+```
+
+and commits **`.claude/settings.json`**. That's all: teammates don't run anything.
+
+The command adds these two keys to `.claude/settings.json`, keeping whatever the file already holds. You can also add them by hand:
 
 ```json
 {
@@ -53,12 +61,13 @@ Then each person logs in once: run `/mcp`, choose **`plugin:plannerq:plannerq`**
 
 ### Try it alone first
 
-In Claude Code:
+To try the plugin in one repository without changing anything the team shares, run this in the repository's root folder:
 
+```sh
+claude plugin install plannerq --marketplace plannerq/claude-plugin --scope local
 ```
-/plugin marketplace add plannerq/claude-plugin
-/plugin install plannerq@plannerq --scope project
-```
+
+It is enabled only for you, only in this repository (in `.claude/settings.local.json`, which isn't committed). Running the project command above later makes it the team's.
 
 ## Which PlannerQ project?
 

@@ -2,6 +2,10 @@
 
 Every change bumps `version` in `.claude-plugin/plugin.json` and gets an entry here, newest first.
 
+## 0.1.2 (2026-11-13)
+
+- README: install for a project with one command (it writes the committed settings); try it alone with one command (local scope).
+
 ## 0.1.1 (2026-11-13)
 
 - README: explains why the server is listed as `plugin:plannerq:plannerq`.
