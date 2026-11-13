@@ -1,0 +1,6 @@
+{
+  "plannerq": {
+    "type": "http",
+    "url": "https://app.plannerq.com/mcp"
+  }
+}

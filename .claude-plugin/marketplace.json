@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "plannerq",
+  "description": "The official PlannerQ plugin for Claude Code.",
+  "owner": { "name": "PlannerQ", "url": "https://plannerq.com" },
+  "plugins": [
+    {
+      "name": "plannerq",
+      "source": "./",
+      "description": "Standard skills, standard rules and the PlannerQ MCP server for teams planning their software work in PlannerQ.",
+      "category": "productivity",
+      "homepage": "https://plannerq.com"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "description": "Adds the PlannerQ standard rules to every session (start, resume, /clear and after compaction).",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"${CLAUDE_PLUGIN_ROOT}/rules/standard-rules.md\""
+          }
+        ]
+      }
+    ]
+  }
+}
