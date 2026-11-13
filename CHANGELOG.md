@@ -2,6 +2,10 @@
 
 Every change bumps `version` in `.claude-plugin/plugin.json` and gets an entry here, newest first.
 
+## 0.1.1 (2026-11-13)
+
+- README: explains why the server is listed as `plugin:plannerq:plannerq`.
+
 ## 0.1.0 (2026-11-13)
 
 First version.

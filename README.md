@@ -1,6 +1,6 @@
 # PlannerQ plugin for Claude Code
 
-> **Official sources only.** The only official install instructions for this plugin are on **plannerq.com** and in the **PlannerQ app** (Settings → Claude Code). The only official MCP address is **`https://app.plannerq.com/mcp`**. Before you log in, run `/mcp` in Claude Code and check that `plugin:plannerq:plannerq` shows exactly that address. A copy of this plugin that points anywhere else is not PlannerQ: don't log in to it, and please report it (see [SECURITY.md](SECURITY.md)).
+> **Official sources only.** The only official install instructions for this plugin are on **plannerq.com** and in the **PlannerQ app** (Settings → Claude Code). The only official MCP address is **`https://app.plannerq.com/mcp`**. Before you log in, run `/mcp` in Claude Code and check that `plugin:plannerq:plannerq` shows exactly that address. (The name is doubled on purpose: Claude Code lists a plugin's servers as `plugin:<plugin>:<server>`, and both are called `plannerq`.) A copy of this plugin that points anywhere else is not PlannerQ: don't log in to it, and please report it (see [SECURITY.md](SECURITY.md)).
 
 PlannerQ is where your team plans its software work. This plugin connects Claude Code to it and gives every person on the team the same way of working:
 
