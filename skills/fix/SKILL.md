@@ -46,7 +46,7 @@ A bug from the public bug form comes back either **held back** ("not reviewed ye
 
 ## Closing
 
-Don't close the bug yourself. When the PR is merged, PlannerQ's GitHub automation closes it as `fixed`. If the person asks you to close it by hand, use `update_item` with `fields: { status: "done" }` and `resolution: "fixed"`. Set the `fixed_in_version` field only if the person tells you the version.
+Don't close the bug yourself. When the PR is merged, PlannerQ's GitHub automation closes it as `fixed`. If the person asks you to close it by hand, use `update_item` with `fields: { status: "done" }` and `resolution: "fixed"`. Set the `fixed_in_version` field (the release it ships in, by name) only if the person names the release.
 
 ## Finish
 

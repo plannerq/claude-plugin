@@ -7,7 +7,7 @@ fail=0
 err() { echo "FAIL: $*" >&2; fail=1; }
 
 OFFICIAL_MCP="https://app.plannerq.com/mcp"
-SKILLS="pick fix story test-cases e2e unit-tests dev-docs manual profile review security-review"
+SKILLS="pick fix story test-cases e2e unit-tests dev-docs manual release-notes profile review security-review"
 
 # JSON files parse.
 for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json .mcp.json hooks/hooks.json; do
