@@ -53,7 +53,8 @@ Then each person logs in once: run `/mcp`, choose **`plugin:plannerq:plannerq`**
       "mcp__plugin_plannerq_plannerq__get_project_context",
       "mcp__plugin_plannerq_plannerq__get_item",
       "mcp__plugin_plannerq_plannerq__list_items",
-      "mcp__plugin_plannerq_plannerq__list_triage"
+      "mcp__plugin_plannerq_plannerq__list_triage",
+      "mcp__plugin_plannerq_plannerq__get_release"
     ]
   }
 }
@@ -93,6 +94,7 @@ Type the command, or paste it from the **Claude** button on an item in PlannerQ.
 | `/plannerq:unit-tests [ID, files or branch]` | Dev | Unit tests in the project's framework and style. |
 | `/plannerq:dev-docs [ID, module or branch]` | Dev | Developer docs in `docs/dev`. |
 | `/plannerq:manual <ID or topic>` | Dev, tester | User manual pages in `docs/manual`, with screenshot slots the tester fills in PlannerQ. |
+| `/plannerq:release-notes <release>` | Anyone | Release notes from the release's items and pull requests: New, Improved, Fixed, and a technical part. Saved to the release in PlannerQ and to `CHANGELOG.md`. |
 | `/plannerq:profile` | Anyone | Builds or refreshes the project profile (stack, commands, environments, conventions) from the repository. Every other skill reads it. |
 | `/plannerq:review [ID or PR] [level]` | Dev, tester | Claude Code's code review plus a check of the item's acceptance criteria, tests and docs; files the findings you keep. |
 | `/plannerq:security-review [ID, PR or repo]` | Dev | Claude Code's security review plus checks for your stack; files the findings you keep as bugs. |

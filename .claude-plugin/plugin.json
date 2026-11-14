@@ -1,10 +1,10 @@
 {
   "name": "plannerq",
-  "version": "0.1.2",
-  "description": "PlannerQ for Claude Code: standard skills for BAs, developers and testers (stories, test cases, e2e and unit tests, bug fixes, docs, user manual, reviews), the team's standard rules, and the PlannerQ MCP server.",
+  "version": "0.2.0",
+  "description": "PlannerQ for Claude Code: standard skills for BAs, developers and testers (stories, test cases, e2e and unit tests, bug fixes, docs, user manual, release notes, reviews), the team's standard rules, and the PlannerQ MCP server.",
   "author": { "name": "PlannerQ", "url": "https://plannerq.com" },
   "homepage": "https://plannerq.com",
   "repository": "https://github.com/plannerq/claude-plugin",
   "license": "Apache-2.0",
-  "keywords": ["plannerq", "project-management", "user-stories", "testing", "playwright", "code-review"]
+  "keywords": ["plannerq", "project-management", "user-stories", "testing", "playwright", "code-review", "release-notes"]
 }
