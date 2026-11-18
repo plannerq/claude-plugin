@@ -7,7 +7,7 @@ fail=0
 err() { echo "FAIL: $*" >&2; fail=1; }
 
 OFFICIAL_MCP="https://app.plannerq.com/mcp"
-SKILLS="pick fix story test-cases e2e unit-tests dev-docs manual release-notes profile review security-review"
+SKILLS="pick fix story test-cases e2e unit-tests dev-docs manual manual-init release-notes profile review security-review"
 
 # JSON files parse.
 for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json .mcp.json hooks/hooks.json; do
@@ -46,8 +46,15 @@ for d in skills/*/; do
   case " $SKILLS " in *" $s "*) ;; *) err "skills/$s is not in the list in scripts/check.sh" ;; esac
 done
 
-# Only pick runs manual-only (it creates branches and opens PRs).
-grep -qx 'disable-model-invocation: true' skills/pick/SKILL.md || err "pick must have disable-model-invocation: true"
+# Typed-only skills: pick creates branches and opens PRs; manual-init writes a whole manual.
+for s in pick manual-init; do
+  grep -qx 'disable-model-invocation: true' "skills/$s/SKILL.md" || err "$s must have disable-model-invocation: true"
+done
+
+# The manual rules live in one file; other skills point to it instead of copying it.
+for f in skills/*/SKILL.md; do
+  grep -q '^A slot is an HTML comment on its own line' "$f" && err "$f copies the manual rules; point to skills/manual/rules.md instead"
+done
 
 # Every skill names the official MCP login path, never another address.
 if grep -rnoE 'https?://[A-Za-z0-9.-]*plannerq[A-Za-z0-9.-]*/mcp' --include='*.md' . | grep -v "$OFFICIAL_MCP" ; then
