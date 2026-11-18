@@ -94,6 +94,7 @@ Type the command, or paste it from the **Claude** button on an item in PlannerQ.
 | `/plannerq:unit-tests [ID, files or branch]` | Dev | Unit tests in the project's framework and style. |
 | `/plannerq:dev-docs [ID, module or branch]` | Dev | Developer docs in `docs/dev`. |
 | `/plannerq:manual <ID or topic>` | Dev, tester | User manual pages in `docs/manual`, with screenshot slots the tester fills in PlannerQ. |
+| `/plannerq:manual-init [scope notes]` | Dev, tester | A whole user manual for a project that has none: finds what users can do from the code, proposes an outline for your approval, writes every page (checking them in your local app when it runs, without saving anything there) and offers review and screenshot tasks in PlannerQ. Picks up where it stopped if interrupted. Runs only when you type it. |
 | `/plannerq:release-notes <release>` | Anyone | Release notes from the release's items and pull requests: New, Improved, Fixed, and a technical part. Saved to the release in PlannerQ and to `CHANGELOG.md`. |
 | `/plannerq:profile` | Anyone | Builds or refreshes the project profile (stack, commands, environments, conventions) from the repository. Every other skill reads it. |
 | `/plannerq:review [ID or PR] [level]` | Dev, tester | Claude Code's code review plus a check of the item's acceptance criteria, tests and docs; files the findings you keep. |
