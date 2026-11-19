@@ -2,6 +2,14 @@
 
 Every change bumps `version` in `.claude-plugin/plugin.json` and gets an entry here, newest first.
 
+## 0.3.2 (2026-11-19)
+
+- `fix`: new Docs step. When a fix changes what users see or do, it updates the affected `docs/manual` page (and `docs/dev` where relevant), or says no docs change was needed. The PR body, the bug comment and the summary now list docs changed.
+
+## 0.3.1 (2026-11-19)
+
+- `story`: new stories (and any epic it creates) are always saved in Backlog, ready or not; it used to save ready stories in To do. A refined story keeps its status.
+
 ## 0.3.0 (2026-11-18)
 
 - New skill `manual-init` (`/plannerq:manual-init [scope notes]`): writes a complete user manual for a project that has none. It inventories the features from the code, proposes an outline for approval, writes the sections with subagents, checks pages in the local app when it runs (looking only, never saving), and offers an epic with a task per section for review and screenshots (a parent task with subtasks when epics are off). An interrupted run resumes from the pages still marked pending. Runs only when typed.

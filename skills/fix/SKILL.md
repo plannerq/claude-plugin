@@ -33,14 +33,16 @@ A bug from the public bug form comes back either **held back** ("not reviewed ye
 5. **Failing test first.** Write a test that fails because of the bug: a unit test where the cause is in logic, an e2e test where it only shows in the browser. Run it and show that it fails for the right reason.
 6. **Fix the cause, not the symptom.** Find why it happens. Keep the change as small as the cause allows. Look for the same mistake nearby and mention it (fix it only if it is the same bug).
 7. **Check.** The new test passes; run the related tests and the profile's typecheck and lint commands. Report failures exactly as they are.
-8. **Commit** with the ID (`PLN-31: …`).
-9. **Pull request (ask first).** Title `PLN-31: <bug title>`; body: cause, fix, the test that covers it, and a link to the bug. Push and open it with `gh pr create` if available; otherwise push and give the compare URL.
-10. **Comment** on the bug (`add_comment`), using this layout:
+8. **Docs.** If the fix changes what users see or do (a page in `docs/manual` describes the old behaviour, or a step, message or screen changed), update that page (the `manual` skill's rules apply) and `docs/dev` where the change touches what developers rely on (the `dev-docs` skill's rules apply). If no docs change is needed, say so.
+9. **Commit** with the ID (`PLN-31: …`).
+10. **Pull request (ask first).** Title `PLN-31: <bug title>`; body: cause, fix, the test that covers it, docs changed (or "none needed"), and a link to the bug. Push and open it with `gh pr create` if available; otherwise push and give the compare URL.
+11. **Comment** on the bug (`add_comment`), using this layout:
 
     ```
     **Cause:** <why it happened, with file paths>
     **Fix:** <what changed>
     **Test:** <the test that failed before and passes now>
+    **Docs:** <pages updated, or "none needed">
     **PR:** <link>
     ```
 
@@ -50,4 +52,4 @@ Don't close the bug yourself. When the PR is merged, PlannerQ's GitHub automatio
 
 ## Finish
 
-One short summary: cause, fix, test, PR link, and the bug's ID.
+One short summary: cause, fix, test, docs changed (or none needed), PR link, and the bug's ID.
