@@ -41,15 +41,17 @@ A story is ready only when all of these hold:
 - Dependencies are linked (`blocks`, `relates_to`).
 - It fits one pull request. If not, propose a split into smaller stories, each delivering something a user can see.
 
-If any fails, say the story is **not ready** and why. Never call a story ready while open questions remain. It can still be saved as not ready (status backlog) if the person wants.
+If any fails, say the story is **not ready** and why. Never call a story ready while open questions remain. Ready or not, it can be saved: new items always go to Backlog (see Saving).
 
 ## Epics
 
-Split the epic into vertical slices: each story delivers something usable end to end (UI, data, permissions), not "backend" and "frontend" halves. Show the list of story titles with one line each first; after the person agrees on the list, draft the stories in full. Save each as a subtask of the epic (`create_item` with `parent`).
+Split the epic into vertical slices: each story delivers something usable end to end (UI, data, permissions), not "backend" and "frontend" halves. Show the list of story titles with one line each first; after the person agrees on the list, draft the stories in full. Save each as a subtask of the epic (`create_item` with `parent` and `status: backlog`).
 
 ## Saving
 
-- New story: `create_item` with `type: story`, `title`, `description` (Markdown), `checklist` (the acceptance criteria) and `parent` if it belongs to an epic. Status: `todo` when ready, `backlog` when not.
+- New story: `create_item` with `type: story`, `title`, `description` (Markdown), `checklist` (the acceptance criteria) and `parent` if it belongs to an epic.
+- **Status of new items: always `backlog`**, ready or not, for every story and any epic this skill creates. Pass `status: backlog` on every `create_item` (PlannerQ defaults to `todo` otherwise). The team moves items on when they plan the work.
+- An existing story keeps its status when refined.
 - Existing story: `update_item` for the title and description; `set_checklist` for the criteria (entries with unchanged text keep their ticks; warn the person before removing a ticked entry).
 - Links: `add_link` for each dependency found.
 - Story points (`fields.story_points`: 1, 2, 3, 5, 8, 13, 21, or 0 for "?") **only if the person asks**, and only if the field is in use.
@@ -63,4 +65,4 @@ Split the epic into vertical slices: each story delivers something usable end to
 
 ## Finish
 
-One short summary: the stories created or updated, with their IDs, and whether each is ready. If not ready, list what is missing.
+One short summary: the stories created or updated, with their IDs, and whether each is ready. If not ready, list what is missing. Say that new stories are in Backlog.

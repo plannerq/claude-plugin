@@ -1,6 +1,6 @@
 {
   "name": "plannerq",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "PlannerQ for Claude Code: standard skills for BAs, developers and testers (stories, test cases, e2e and unit tests, bug fixes, docs, user manual, release notes, reviews), the team's standard rules, and the PlannerQ MCP server.",
   "author": { "name": "PlannerQ", "url": "https://plannerq.com" },
   "homepage": "https://plannerq.com",
