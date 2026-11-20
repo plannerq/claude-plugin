@@ -7,7 +7,7 @@ fail=0
 err() { echo "FAIL: $*" >&2; fail=1; }
 
 OFFICIAL_MCP="https://app.plannerq.com/mcp"
-SKILLS="pick fix story test-cases e2e unit-tests dev-docs manual manual-init release-notes profile review security-review"
+SKILLS="pick fix story test-cases test-cases-init e2e unit-tests dev-docs manual manual-init release-notes profile review security-review"
 
 # JSON files parse.
 for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json .mcp.json hooks/hooks.json; do
@@ -49,6 +49,16 @@ done
 # Typed-only skills: pick creates branches and opens PRs; manual-init writes a whole manual.
 for s in pick manual-init; do
   grep -qx 'disable-model-invocation: true' "skills/$s/SKILL.md" || err "$s must have disable-model-invocation: true"
+done
+
+# Skills Claude must be able to pick by itself: test-cases-init is the route for projects with no stories.
+for s in test-cases-init; do
+  grep -q '^disable-model-invocation: true' "skills/$s/SKILL.md" && err "$s must not have disable-model-invocation: true"
+done
+
+# The test case rules live in one file; other skills point to it instead of copying it.
+for f in skills/*/SKILL.md; do
+  grep -q '^- \*\*Title:\*\* `Test: <one behaviour>`' "$f" && err "$f copies the test case rules; point to skills/test-cases/rules.md instead"
 done
 
 # The manual rules live in one file; other skills point to it instead of copying it.
