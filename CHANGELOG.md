@@ -2,6 +2,11 @@
 
 Every change bumps `version` in `.claude-plugin/plugin.json` and gets an entry here, newest first.
 
+## 0.6.0 (2026-11-20)
+
+- `test-cases-init` checks expected results in the local app. Before writing a wave (or finishing a half-written area) it asks once per run whether to check on screen at the profile's local dev URL or write from the code only. It never uses a staging or production URL and says why. It starts the dev server if it isn't running; if the server can't run, you choose to set it up now, continue from the code only, or stop. You sign in yourself in the browser; it never asks for a password or token. In the app it looks only: it opens screens, menus and dialogs and closes them with Cancel, Close or Escape, and never saves, creates, deletes, sends, drags or uploads. Where the browser shows network requests, it checks that none wrote data, and stops checking if one did. Labels on screen win over the code, and a behaviour difference becomes a question. Areas checked through one shared browser run one at a time. Each area case gets a **Checked:** line (`in the app` or `from the code`), and the hand-off lists per area which cases were checked where, the roles needed for screens it couldn't open, and the labels taken from the screen.
+- Case template: a **Checked:** line for area cases (story cases leave it out).
+
 ## 0.5.0 (2026-11-20)
 
 - `test-cases-init` writes the next wave. Run again on a project that already has a `Test cases:` epic, it first finishes any area a run left half-written (creating only the missing cases, none twice), then checks the gate: if any `Test:` case under the written areas isn't Done, it lists the open cases per area and writes nothing, unless you explicitly say "write it anyway" (the hand-off notes the override). Otherwise it shows the next wave's areas with their planned lines refreshed against the current code (new and dropped lines marked) and asks for a yes; you can move areas between waves or change the wave size first. Written areas and their cases are never changed. After the last wave it says coverage of the planned areas is complete; with nothing pending it says so and writes nothing. Two `Test cases:` epics: it asks which one to continue.

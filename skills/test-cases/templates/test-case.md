@@ -4,6 +4,8 @@ Automate: <yes | no — one line why not>
 
 **Source:** <area cases only: the code paths or manual page the expected results come from. Leave this line out of story cases.>
 
+**Checked:** <area cases only: `in the app` or `from the code`; when only some steps were seen on screen, e.g. `in the app; steps 3–4 from the code (they save data)`. Leave this line out of story cases.>
+
 **Preconditions**
 - <Signed in as … (role)>
 - <State the app must be in before step 1>
