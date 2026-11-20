@@ -2,6 +2,12 @@
 
 Every change bumps `version` in `.claude-plugin/plugin.json` and gets an entry here, newest first.
 
+## 0.7.0 (2026-11-20)
+
+- `e2e` automates a test area. Besides a story or one `Test:` case, it takes a `Test area:` task from `test-cases-init` (its cases marked `Automate: yes`, with the area task read for context) or a `Test cases:` epic, where it lists the areas and asks which to automate. Each area gets one spec named after it (e.g. `e2e/board.spec.ts`); an existing spec gets the new tests added. Cases that already have an `Automated in` comment are skipped unless you ask to rewrite them. An area with no cases to automate, or still pending, is reported and nothing is written; any other kind of ID gets the list of inputs it accepts.
+- `e2e` moves passing cases to Done. After the run it lists the cases whose tests passed and asks once; on yes, exactly those move to Done, for story and area cases alike. Cases whose tests failed, were flaky, or are marked `test.fail()`, `test.fixme()` or `test.skip()` stay open. This lets automated area cases count toward the `test-cases-init` wave gate; if you say no, the summary says the next wave stays blocked. Bugs it offers are linked `relates_to` the story or the area task.
+- `test-cases-init`: the hand-off points to `/plannerq:e2e <area task or epic ID>`.
+
 ## 0.6.0 (2026-11-20)
 
 - `test-cases-init` checks expected results in the local app. Before writing a wave (or finishing a half-written area) it asks once per run whether to check on screen at the profile's local dev URL or write from the code only. It never uses a staging or production URL and says why. It starts the dev server if it isn't running; if the server can't run, you choose to set it up now, continue from the code only, or stop. You sign in yourself in the browser; it never asks for a password or token. In the app it looks only: it opens screens, menus and dialogs and closes them with Cancel, Close or Escape, and never saves, creates, deletes, sends, drags or uploads. Where the browser shows network requests, it checks that none wrote data, and stops checking if one did. Labels on screen win over the code, and a behaviour difference becomes a question. Areas checked through one shared browser run one at a time. Each area case gets a **Checked:** line (`in the app` or `from the code`), and the hand-off lists per area which cases were checked where, the roles needed for screens it couldn't open, and the labels taken from the screen.

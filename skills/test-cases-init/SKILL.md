@@ -124,7 +124,7 @@ One message:
 - **Questions:** behaviour that looked wrong, differed between the screen and the code, or couldn't be confirmed, in one list. None of it is written as an expected result. Offer to file the ones the person confirms as bugs: show each bug (title, steps, expected and actual result) before creating it.
 - **Left out:** features left out and why.
 - **Failed areas**, if any, by ID and title: they kept the marker.
-- **Next:** `/plannerq:e2e` automates the cases marked `Automate: yes`; run this skill again once **every wave-1 case is Done** to write wave 2 (a run that stopped midway is finished the same way). Everything is in Backlog.
+- **Next:** `/plannerq:e2e <area task or epic ID>` automates the cases marked `Automate: yes` and, after a yes, moves those whose tests pass to Done; the rest are run by hand. Run this skill again once **every wave-1 case is Done** to write wave 2 (a run that stopped midway is finished the same way). Everything is in Backlog.
 
 ## 7. Next wave
 
@@ -192,7 +192,7 @@ As step 6, with these parts:
 - **Checked:** as in step 6, for the areas finished or written this run.
 - **Override**, if the gate was overridden: "Written although <k> cases of earlier waves weren't Done, because you said to write anyway."
 - **Pending:** the area tasks still to write, by ID and title with their wave, and how many waves are left. **If no area is pending now:** "Coverage of the planned areas is complete." From now on, cases for new stories come from `/plannerq:test-cases <story ID>`; run this skill again only to plan areas left out earlier or new since.
-- **Next:** `/plannerq:e2e` automates the cases marked `Automate: yes`; while areas are pending, run this skill again once every case of wave <n> is Done.
+- **Next:** `/plannerq:e2e <area task or epic ID>` automates the cases marked `Automate: yes` and, after a yes, moves those whose tests pass to Done; while areas are pending, run this skill again once every case of wave <n> is Done.
 
 ## Guardrails
 
