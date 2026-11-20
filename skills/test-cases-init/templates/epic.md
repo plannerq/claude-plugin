@@ -4,7 +4,7 @@ Complete test coverage of <product>, written by `/plannerq:test-cases-init` from
 
 ## Areas and waves
 
-In risk order. An area task with `test-cases-init: pending` at the top of its description isn't written yet; its planned cases are lines in it.
+In risk order. An area task with `test-cases-init: pending` at the top of its description isn't written yet; its planned cases are lines in it. Running `/plannerq:test-cases-init` again writes the next wave; this table is updated when areas move between waves.
 
 | Wave | Area task | Manual | Automate | Unit/database |
 |---|---|---|---|---|
