@@ -59,6 +59,14 @@ done
 # test-cases-init writes one wave at a time: the next wave waits until the earlier waves' cases are Done.
 grep -q '^### 7.3 The gate' skills/test-cases-init/SKILL.md || err "skills/test-cases-init/SKILL.md has lost its wave gate (### 7.3 The gate)"
 
+# Skills that check in the app do it locally and look only: the local app may use a production database.
+for s in manual-init test-cases-init; do
+  f="skills/$s/SKILL.md"
+  grep -q '^- \*\*Local development only\.\*\*' "$f" || err "$f has lost the local-only rule (- **Local development only.**)"
+  grep -q '^- \*\*Look only, never save\.\*\*' "$f" || err "$f has lost the look-only rule (- **Look only, never save.**)"
+done
+grep -q 'never open any URL other than the local app' skills/test-cases-init/templates/area-brief.md || err "skills/test-cases-init/templates/area-brief.md has lost its look-only rules"
+
 # The test case rules live in one file; other skills point to it instead of copying it.
 for f in skills/*/SKILL.md; do
   grep -q '^- \*\*Title:\*\* `Test: <one behaviour>`' "$f" && err "$f copies the test case rules; point to skills/test-cases/rules.md instead"
