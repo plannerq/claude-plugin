@@ -19,6 +19,7 @@ The rules every `Test:` case follows. Both `/plannerq:test-cases` (cases for one
 - **Expected results come from what the product is meant to do:** the acceptance criteria, the manual, and the code. If the code does something that looks wrong (a missing permission check, a confusing message, data lost), never write that as the expected result: leave the case out or stop it before that step, and raise it as a question for the person.
 - **Closely related checks share one case** with more steps (e.g. the empty state, adding the first item and the counter updating), rather than three cases of one step each. Different roles, different error states and different outcomes are separate cases.
 - **No duplicates.** Read the existing `Test:` cases first. A behaviour already tested gets no second case; extend an existing case only if the person agrees.
+- **Changing an existing case** (extending it, or updating it because the behaviour changes) only with the person's yes, showing its steps before → after. Keep its title: lists such as an area task's cases name it. If checklist entries are ticked, say so first: someone ran it, and a reworded step loses its tick. If it has an `Automated in` comment, say that this automated test may need updating too.
 
 ## Cover what matters
 

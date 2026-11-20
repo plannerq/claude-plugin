@@ -59,6 +59,9 @@ done
 # test-cases-init writes one wave at a time: the next wave waits until the earlier waves' cases are Done.
 grep -q '^### 7.3 The gate' skills/test-cases-init/SKILL.md || err "skills/test-cases-init/SKILL.md has lost its wave gate (### 7.3 The gate)"
 
+# test-cases reuses area cases only where test-cases-init wrote them; without them it works as before.
+grep -q 'skip every step about area cases: the skill works as before' skills/test-cases/SKILL.md || err "skills/test-cases/SKILL.md has lost its no-area-cases branch (skip every step about area cases)"
+
 # e2e moves cases to Done only after asking once, and only those whose tests passed.
 grep -q '^8\. \*\*Move passing cases to Done\.\*\*.*ask \*\*once\*\*' skills/e2e/SKILL.md || err "skills/e2e/SKILL.md has lost its ask-once step (8. Move passing cases to Done)"
 

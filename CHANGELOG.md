@@ -2,6 +2,11 @@
 
 Every change bumps `version` in `.claude-plugin/plugin.json` and gets an entry here, newest first.
 
+## 0.8.0 (2026-11-20)
+
+- `test-cases` reuses area cases. In a project where `test-cases-init` wrote a `Test cases:` epic, it looks for area cases that already test the story's behaviour: in the areas whose screens the story touches, and by searching titles for each criterion's key words. In the list it shows, each criterion is marked **covered by** an area case (ID and title, no new case), **extends** an area case (the proposed extra steps, applied only if you agree; otherwise a new case covers the rest) or **new**. Several area cases that each cover part of a criterion are all listed, with a new case for what is missing. If the story changes behaviour an area case tests, it proposes updating that case, shown first, and says its automated test (`Automated in` comment) may need updating too. Changes to area cases keep their title and warn when someone has already ticked steps. Reused, extended and updated area cases are linked `relates_to` the story, and the story's mapping comment lists them next to the new cases. With no `Test cases:` epic it works as before. Area task descriptions are never changed.
+- Test case rules: changing an existing case needs a yes with its steps before → after, keeps the title, warns about ticked steps and names its automated test.
+
 ## 0.7.0 (2026-11-20)
 
 - `e2e` automates a test area. Besides a story or one `Test:` case, it takes a `Test area:` task from `test-cases-init` (its cases marked `Automate: yes`, with the area task read for context) or a `Test cases:` epic, where it lists the areas and asks which to automate. Each area gets one spec named after it (e.g. `e2e/board.spec.ts`); an existing spec gets the new tests added. Cases that already have an `Automated in` comment are skipped unless you ask to rewrite them. An area with no cases to automate, or still pending, is reported and nothing is written; any other kind of ID gets the list of inputs it accepts.
