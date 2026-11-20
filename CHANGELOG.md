@@ -2,6 +2,10 @@
 
 Every change bumps `version` in `.claude-plugin/plugin.json` and gets an entry here, newest first.
 
+## 0.9.0 (2026-11-20)
+
+- `test-cases-init`: the next wave skips behaviour that story cases already test. When it refreshes the next wave's planned lines, it also reads the project's story `Test:` cases (any status: the gate still counts area cases only). In the next-wave message a line a story case tests is marked **covered by** that case and its story (ID and title) and gets no area case; a line a story case tests only in part is **narrowed** to what is missing, and the message says which case covers the rest. Other lines are planned as before. The marks are saved in the area task's plan when you approve; when the area is written, its **Covered elsewhere** section lists those lines with the story case, and each story case is linked `relates_to` the area task. Story cases are never moved or changed.
+
 ## 0.8.0 (2026-11-20)
 
 - `test-cases` reuses area cases. In a project where `test-cases-init` wrote a `Test cases:` epic, it looks for area cases that already test the story's behaviour: in the areas whose screens the story touches, and by searching titles for each criterion's key words. In the list it shows, each criterion is marked **covered by** an area case (ID and title, no new case), **extends** an area case (the proposed extra steps, applied only if you agree; otherwise a new case covers the rest) or **new**. Several area cases that each cover part of a criterion are all listed, with a new case for what is missing. If the story changes behaviour an area case tests, it proposes updating that case, shown first, and says its automated test (`Automated in` comment) may need updating too. Changes to area cases keep their title and warn when someone has already ticked steps. Reused, extended and updated area cases are linked `relates_to` the story, and the story's mapping comment lists them next to the new cases. With no `Test cases:` epic it works as before. Area task descriptions are never changed.
