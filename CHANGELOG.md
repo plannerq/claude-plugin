@@ -2,6 +2,10 @@
 
 Every change bumps `version` in `.claude-plugin/plugin.json` and gets an entry here, newest first.
 
+## 0.5.0 (2026-11-20)
+
+- `test-cases-init` writes the next wave. Run again on a project that already has a `Test cases:` epic, it first finishes any area a run left half-written (creating only the missing cases, none twice), then checks the gate: if any `Test:` case under the written areas isn't Done, it lists the open cases per area and writes nothing, unless you explicitly say "write it anyway" (the hand-off notes the override). Otherwise it shows the next wave's areas with their planned lines refreshed against the current code (new and dropped lines marked) and asks for a yes; you can move areas between waves or change the wave size first. Written areas and their cases are never changed. After the last wave it says coverage of the planned areas is complete; with nothing pending it says so and writes nothing. Two `Test cases:` epics: it asks which one to continue.
+
 ## 0.4.0 (2026-11-20)
 
 - New skill `test-cases-init` (`/plannerq:test-cases-init [scope notes]`): complete test coverage for a project that has code but no stories, or for whole feature areas. It inventories what users can do from the code (and `docs/manual` when there is one), shows the questions and an outline in one message (areas in risk order, every planned case as one line with its level, the areas grouped into waves of about 30 manual cases), and after approval creates an epic `Test cases: <product>` (a parent task when epics are off) with one `Test area: <area>` task per area, all in Backlog. Subagents write the first wave's `Test:` cases; later areas keep their planned cases as lines, marked `test-cases-init: pending`, until the previous wave's cases are Done. Behaviour that looks wrong becomes a question, never an expected result. Claude can pick it by itself. Writing later waves comes in a later version; for now a second run lists the pending areas and stops.

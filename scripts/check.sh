@@ -56,6 +56,9 @@ for s in test-cases-init; do
   grep -q '^disable-model-invocation: true' "skills/$s/SKILL.md" && err "$s must not have disable-model-invocation: true"
 done
 
+# test-cases-init writes one wave at a time: the next wave waits until the earlier waves' cases are Done.
+grep -q '^### 7.3 The gate' skills/test-cases-init/SKILL.md || err "skills/test-cases-init/SKILL.md has lost its wave gate (### 7.3 The gate)"
+
 # The test case rules live in one file; other skills point to it instead of copying it.
 for f in skills/*/SKILL.md; do
   grep -q '^- \*\*Title:\*\* `Test: <one behaviour>`' "$f" && err "$f copies the test case rules; point to skills/test-cases/rules.md instead"
