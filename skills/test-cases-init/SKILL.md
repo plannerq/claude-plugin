@@ -132,7 +132,7 @@ An earlier run created the parent; its area tasks hold the plan and the progress
 
 ### 7.1 Where things stand
 
-Read the parent (`get_item`) and every area task under it (`list_items` with `parent` = it, paging with `offset`; then `get_item` on each, which lists its subtasks and their status). Only `Test:` subtasks of area tasks count here; cases under stories don't. Sort the area tasks:
+Read the parent (`get_item`) and every area task under it (`list_items` with `parent` = it, paging with `offset`; then `get_item` on each, which lists its subtasks and their status). Only `Test:` subtasks of area tasks count here and in the gate; cases under stories don't (7.4 reads them only to avoid planning their behaviour twice). Sort the area tasks:
 
 - **Written:** no pending marker.
 - **Interrupted:** the marker, and some `Test:` subtasks already (a run stopped midway).
@@ -144,7 +144,7 @@ Tell the person in one line, e.g. "4 areas written, 1 half-written, 6 pending in
 
 ### 7.2 Finish interrupted areas first
 
-This doesn't wait for the gate: the area's cases were approved in an earlier run. Tell the person, one line per area: "<ID> Test area: <area> was left half-written (<n> cases); finishing it, creating only the missing cases." First decide checking in the app as in 4.1 (ask again: an earlier run's answer doesn't carry over). Then give each to a subagent as in 4.2, with the brief's **Cases already written** filled in: every existing `Test:` subtask by ID, title and status. The subagent creates only the cases still missing and then rewrites the area task. If its plan is missing, handle it as in 7.4 first.
+This doesn't wait for the gate: the area's cases were approved in an earlier run. Tell the person, one line per area: "<ID> Test area: <area> was left half-written (<n> cases); finishing it, creating only the missing cases." First decide checking in the app as in 4.1 (ask again: an earlier run's answer doesn't carry over). Then give each to a subagent as in 4.2, with the brief's **Cases already written** filled in: every existing `Test:` subtask by ID, title and status. The subagent creates only the cases still missing and then rewrites the area task. If its plan is missing, handle it as in 7.4 first. Lines its plan marks as covered by a story case get no case; link those story cases as in 7.5 once the area is written.
 
 A subagent that fails leaves its area interrupted: say which and **stop** here (no new wave on top of a half-written one); the next run tries again.
 
@@ -163,16 +163,24 @@ The wave is the pending areas with the **lowest wave number**. For each of them:
 
 - **Plan missing:** if its description has no planned lines (someone deleted the plan), say so and offer to plan that area again: read its code paths (find them from the area's name if they were deleted too) and show a short outline for this area alone, in the outline's format. If the person declines, leave the area out of this run and say it stays pending.
 - **Refresh.** Use the plan as it stands in the description: an edited plan is the plan. Read its code paths and compare: lines whose behaviour the code no longer has become **dropped** (with why), behaviour the code has that no line covers becomes **new** lines, following the rules. Check new lines against the written areas' cases and the other areas' lines, so nothing is planned twice.
+- **Story cases.** Stories written before this wave may already have a `Test:` case for a planned line: `test-cases` can't reuse a line that isn't a case yet. Collect the project's story cases: `list_items` with `text: "Test:"` and `type: ["task"]` (page through with `offset`), keeping `Test:` items whose parent is a story, not an area task. For each planned line of the wave (new lines included), find candidates by the line's key words (the screen, the action, the label) and read them (`get_item`): their **Covers** line, preconditions and steps. A story case counts as cover whatever its status: the gate is about area cases only. Mark each line:
+  - **covered by** `<ID> Test: <title>` (story `<ID> <title>`): the story case tests the line's behaviour. No case is planned for it and it doesn't count toward the manual case count. Several story cases that together test all of it are all named.
+  - **narrowed:** story cases test part of the line. Keep the line, reworded to the part none of them tests, and name the cases that cover the rest.
+  - Otherwise the line stays as it is.
+
+  Story cases are never moved or changed.
 
 Show the wave in one message from `${CLAUDE_SKILL_DIR}/templates/next-wave.md`: the wave's areas by ID and title with their refreshed lines and counts, the manual case count against the wave size, the waves left, and what approving writes. Ask for a yes.
 
 **Wait for approval.** The person may change lines or levels, move areas into or out of this wave, or change the wave size (then regroup the pending areas in risk order into waves of the new size; an area is never split; written areas keep their wave numbers). Revise and show it again. **Until the yes nothing is written.**
 
-After the yes, save the plan changes first: `update_item` on each pending area task whose lines, wave number or wave count changed (the marker stays its first line), and on the parent so its Areas and waves table and wave size match the area tasks.
+After the yes, save the plan changes first: `update_item` on each pending area task whose lines, wave number or wave count changed (the marker stays its first line), and on the parent so its Areas and waves table and wave size match the area tasks. A line covered by a story case is saved as `<behaviour> · covered by <ID> Test: <title> (story <ID> <title>)`; a narrowed line is saved reworded, with `(rest covered by <ID> Test: <title>, story <ID> <title>)` after its level.
 
 ### 7.5 Write the wave
 
-As step 4, for the approved areas only: decide checking in the app as in 4.1, unless this run already asked in 7.2 (then keep that answer), and run the subagents as in 4.2. In each brief the sibling areas are all the other area tasks under the parent: written ones with their cases (ID and title), pending ones with their planned lines. Written areas and their cases stay unchanged, and later areas keep their marker.
+As step 4, for the approved areas only: decide checking in the app as in 4.1, unless this run already asked in 7.2 (then keep that answer), and run the subagents as in 4.2. In each brief the sibling areas are all the other area tasks under the parent: written ones with their cases (ID and title), pending ones with their planned lines. Written areas and their cases stay unchanged, and later areas keep their marker. The subagent writes no case for a line covered by a story case and lists it under **Covered elsewhere** with that case.
+
+**Link story cases.** When an area's subagent has returned and the area task no longer has the marker, `add_link` from each story case that covers one of its lines (covered by or narrowed), `relates_to` the area task (`ref` = the story case, `other` = the area task), unless that link is already there. An area whose subagent failed gets no links this run.
 
 ### 7.6 Consistency pass
 
@@ -182,6 +190,7 @@ As step 5, over the whole parent, with these differences:
 - **Written areas from earlier runs are read only.** Don't edit them or their cases. A planned line whose case was deleted is reported as uncovered; recreate it only if the person says so.
 - **No duplicates:** if a new case tests the same behaviour as an earlier one, the new one is merged or dropped, never the earlier one.
 - **Pending areas intact:** each still has the marker as its first line, its wave number and its planned lines, and the parent's table matches the area tasks.
+- **Story cases:** every line of this wave covered by a story case appears under its area's **Covered elsewhere** with that case (ID and title), no area case tests the same behaviour, and the story case is linked `relates_to` the area task.
 
 ### 7.7 Hand-off
 
@@ -189,6 +198,7 @@ As step 6, with these parts:
 
 - **Finished:** the interrupted areas finished this run, by ID and title, with the cases created now.
 - **Wave <n>:** each area task written, by ID and title, with its case count and how many to automate.
+- **Covered by story cases:** per area, the lines left to story cases (each story case and its story by ID and title) and the lines narrowed, and that those story cases are now linked to the area task.
 - **Checked:** as in step 6, for the areas finished or written this run.
 - **Override**, if the gate was overridden: "Written although <k> cases of earlier waves weren't Done, because you said to write anyway."
 - **Pending:** the area tasks still to write, by ID and title with their wave, and how many waves are left. **If no area is pending now:** "Coverage of the planned areas is complete." From now on, cases for new stories come from `/plannerq:test-cases <story ID>`; run this skill again only to plan areas left out earlier or new since.
