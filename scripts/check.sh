@@ -59,6 +59,9 @@ done
 # test-cases-init writes one wave at a time: the next wave waits until the earlier waves' cases are Done.
 grep -q '^### 7.3 The gate' skills/test-cases-init/SKILL.md || err "skills/test-cases-init/SKILL.md has lost its wave gate (### 7.3 The gate)"
 
+# e2e moves cases to Done only after asking once, and only those whose tests passed.
+grep -q '^8\. \*\*Move passing cases to Done\.\*\*.*ask \*\*once\*\*' skills/e2e/SKILL.md || err "skills/e2e/SKILL.md has lost its ask-once step (8. Move passing cases to Done)"
+
 # Skills that check in the app do it locally and look only: the local app may use a production database.
 for s in manual-init test-cases-init; do
   f="skills/$s/SKILL.md"
