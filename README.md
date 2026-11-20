@@ -89,7 +89,8 @@ Type the command, or paste it from the **Claude** button on an item in PlannerQ.
 | `/plannerq:story <idea, epic or story>` | BA | A user story ready for development: acceptance criteria in Given/When/Then as the checklist, scope, UI states, data changes, edge cases, testing notes, open questions. Breaks an epic into stories. |
 | `/plannerq:pick <ID>` | Dev | Picks up a story or task: plan, branch, code with unit tests, docs, pull request (asks first). Runs only when you type it. |
 | `/plannerq:fix <bug ID>` | Dev | Reproduces a bug, writes a failing test, fixes the cause, comments cause and fix on the bug, opens the PR (asks first). |
-| `/plannerq:test-cases <story ID>` | Tester | `Test:` subtasks of the story: steps and expected results as the checklist, marked automate yes or no. |
+| `/plannerq:test-cases <story ID>` | Tester | `Test:` subtasks of the story: steps and expected results as the checklist, marked automate yes or no. Saved in Backlog. |
+| `/plannerq:test-cases-init [scope notes]` | Tester | Complete test coverage for a project with code but no stories (or for whole feature areas): finds what users can do from the code, proposes the areas in risk order grouped into waves of about 30 manual cases for your approval, then creates a `Test cases:` epic with one `Test area:` task per area and writes the first wave's `Test:` cases. Later waves stay planned lines in their area tasks until the previous wave's cases are Done. |
 | `/plannerq:e2e <story or Test: ID>` | Tester | Playwright regression tests (`@regression`) for the cases marked automate. |
 | `/plannerq:unit-tests [ID, files or branch]` | Dev | Unit tests in the project's framework and style. |
 | `/plannerq:dev-docs [ID, module or branch]` | Dev | Developer docs in `docs/dev`. |

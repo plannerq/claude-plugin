@@ -1,6 +1,8 @@
 Automate: <yes | no — one line why not>
 
-**Covers:** acceptance criterion <n> of <story ID>: <short wording>
+**Covers:** <for a story case: acceptance criterion <n> of <story ID> <story title>: <short wording> · for an area case: planned line of <area task ID> <area task title>: <the planned line>>
+
+**Source:** <area cases only: the code paths or manual page the expected results come from. Leave this line out of story cases.>
 
 **Preconditions**
 - <Signed in as … (role)>
@@ -9,6 +11,6 @@ Automate: <yes | no — one line why not>
 **Test data**
 - <Exact values to use: names, numbers, files>
 
-**Environment:** <environment from the profile, e.g. staging>
+**Environment:** <environment from the profile, e.g. local>
 
-<!-- The steps go in the checklist, one per entry: "<action> → <expected result>". Delete this comment. -->
+<The steps go in the checklist, one per entry: "<action> → <expected result>". Leave this line out. If the checklist is off for tasks, put the steps here instead as a numbered list in the same form.>
